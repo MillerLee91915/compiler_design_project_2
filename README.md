@@ -130,8 +130,9 @@ Diagram:
 VOID  MAIN  (	 )   { 	declarations  statements 	}
 			 |		|		
 			 |		ε
-	   ---------------------------------------------------------------------					
-	  |		 |    			|		| 		|											type 		Identifier 	(, Identifier)* 	;	 declarations
+	   ---------------------------------------------------------------------
+	  |		 |    			|		| 		|
+	 type 		Identifier 	(, Identifier)* 	;	 declarations
  	  | 									|
 	 Int                                   					ε
 ```
