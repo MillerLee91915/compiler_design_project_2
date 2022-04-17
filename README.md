@@ -25,7 +25,115 @@ According to the requirement, garmmer have to contain at least
 
 # CTG of my C
 
+program: Void Main '(' ')' '{' declarations statements '}';
 
+primaryExprssion: Constant | Identifier | '(' expression ')';
+
+declarations:
+	type Identifier (',' Identifier)* ';' declarations
+	|;
+
+type: Int | Float;
+
+statements: statement statements |;
+
+signExprssion: primaryExprssion | '-' primaryExprssion;
+
+multiplicativeExpression:
+	signExprssion ('*' signExprssion)*
+	| signExprssion ('/' signExprssion)*
+	| signExprssion ('%' signExprssion)*;
+
+additiveExpression:
+	multiplicativeExpression ('+' multiplicativeExpression)*
+	| multiplicativeExpression ('-' multiplicativeExpression)*
+};
+
+relationalExpression:
+	additiveExpression ('<' additiveExpression)*
+	| additiveExpression ('>' additiveExpression)*
+	| additiveExpression ('<=' additiveExpression)*
+	| additiveExpression ('>=' additiveExpression)*;
+
+equalityExpression:
+	relationalExpression ('==' relationalExpression)*
+	| relationalExpression ('!=' relationalExpression)*;
+
+logicalAndExpression:
+	equalityExpression ('&&' equalityExpression)*;
+
+logicalOrExpression:
+	logicalAndExpression ('||' logicalAndExpression)*;
+
+assignmentExpression:
+	logicalOrExpression
+	| Identifier assignmentOperator assignmentExpression;
+
+assignmentOperator: '=' | '*=' | '/=' | '%=' | '+=' | '-=';
+
+expression:
+	assignmentExpression (',' assignmentExpression)*
+	| Identifier '++'
+	| Identifier '--'
+	| '++' Identifier
+	| '--' Identifier
+	| Printf '(' String (',' '%' Identifier)* ')'
+	| 'scanf' '(' String (',' '&' Identifier)* ')'
+	| Return Constant;
+
+statement:
+	expressionStatement
+	| compoundStatement
+	| iterationStatement
+	| selectionStatement;
+
+compoundStatement: '{' declarations statements '}';
+
+expressionStatement: expression? ';';
+
+selectionStatement:
+	If '(' expression ')' statement ('elseif' statement)* (
+		'else' statement
+	)?;
+
+iterationStatement:
+	While '(' expression ')' statement
+	| Do statement While '(' expression ')' ';'
+	| For '(' expression? ';' expression? ';' expression? ')' statement;
+
+# Example
+
+Input:
+
+```c
+void main()
+{
+		int a;
+}
+```
+
+Output:
+
+type: Int
+declarations: ε
+declarations: type Identifier (, Identifier)*; declarations
+statements: ε
+VOID MAIN () {declarations statements}
+
+Diagram:
+
+					program
+					   |
+   -------------------------------------------------				   
+  |    |    |	 |	 |		|				|		|			
+VOID  MAIN  (	 )   { 	declarations  statements 	}
+							|				|		
+							|				ε
+		   -------------------------------------					
+		  |		 |    			|		| 		|												
+		type Identifier (, Identifier)* ; declarations
+ 		  | 									|
+		 Int                                    ε
 
 ### Reference 
 
