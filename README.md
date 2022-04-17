@@ -121,19 +121,20 @@ statements: ε
 VOID MAIN () {declarations statements}
 
 Diagram:
+```
 
 					program
 					   |
-   -------------------------------------------------				   
-  |    |    |	 |	 |		|				|		|			
+   -----------------------------------------------------	   
+  |    |    |	 |	 |		|		|					
 VOID  MAIN  (	 )   { 	declarations  statements 	}
-							|				|		
-							|				ε
-		   -------------------------------------					
-		  |		 |    			|		| 		|												
-		type Identifier (, Identifier)* ; declarations
- 		  | 									|
-		 Int                                    ε
+			 |		|		
+			 |		ε
+	   ---------------------------------------------------------------------					
+	  |		 |    			|		| 		|											type 		Identifier 	(, Identifier)* 	;	 declarations
+ 	  | 									|
+	 Int                                   					ε
+```
 
 ### Reference 
 
